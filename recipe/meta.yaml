@@ -1,5 +1,5 @@
 {% set name = "wsgidav" %}
-{% set version = "4.3.3" %}
+{% set version = "4.3.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,24 +7,27 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5f0ad71bea72def3018b6ba52da3bcb83f61e0873c27225344582805d6e52b9e
+  sha256: 96c87b43599b3a6f19f5b57e4596f6b5c544351cb5cec28311badf2f537a557f
 
 build:
   entry_points:
     - wsgidav = wsgidav.server.server_cli:run
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 1
+  number: 0
 
 requirements:
   host:
     - python {{ python_min }}
     - pip
+    - setuptools
   run:
     - python >={{ python_min }}
+    - bcrypt >=4.0,<5
     - defusedxml
     - jinja2
     - json5
+    - passlib
     - pyyaml
 
 test:
